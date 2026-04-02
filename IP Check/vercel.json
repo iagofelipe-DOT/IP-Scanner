@@ -3,6 +3,14 @@
     {
       "source": "/api/(.*)",
       "destination": "/api/server.js"
+    },
+    {
+      "source": "/",
+      "destination": "/src/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/src/$1"
     }
   ]
 }
