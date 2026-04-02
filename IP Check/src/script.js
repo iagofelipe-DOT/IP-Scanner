@@ -14,7 +14,7 @@ $(document).ready(function() {
         $('#progress-container').show();
         $('#progress-bar').css('width', '0%').animate({ width: '100%' }, 2000);
         $.ajax({
-        url: 'https://project-tzws4.vercel.app/api/server',
+        url: '/api/server',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({ target: target }),
