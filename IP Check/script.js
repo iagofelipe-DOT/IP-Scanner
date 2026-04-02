@@ -11,40 +11,43 @@ $(document).ready(function() {
             return;
         }
 
-       
-        $(this).prop('disabled', true).text('Escaneando...');
-        $('#results').html('<p>Iniciando varredura em <strong>' + target + '</strong>...</p>');
-
         $('#progress-container').show();
         $('#progress-bar').css('width', '0%').animate({ width: '100%' }, 2000);
-        setTimeout(function() {
+        $.ajax({
+        url: 'https://project-tzws4.vercel.app/api/server',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({ target: target }),
+        success: function(response) {
+            $('#progress-container').hide();
             $('#scan-btn').prop('disabled', false).text('Escanear');
-
-            const mockResults = `
-                <table style="width:100%; text-align:left; border-collapse: collapse; margin-top: 15px;">
-                    <tr style="border-bottom: 2px solid #444;">
-                        <th style="padding: 10px;">Porta</th>
-                        <th style="padding: 10px;">Status</th>
-                        <th style="padding: 10px;">Serviço</th>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #333;">
-                        <td style="padding: 8px;">80</td>
-                        <td style="padding: 8px; color: #4caf50;">Aberta</td>
-                        <td style="padding: 8px;">HTTP</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #333;">
-                        <td style="padding: 8px;">443</td>
-                        <td style="padding: 8px; color: #4caf50;">Aberta</td>
-                        <td style="padding: 8px;">HTTPS</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 8px;">22</td>
-                        <td style="padding: 8px; color: #f44336;">Fechada</td>
-                        <td style="padding: 8px;">SSH</td>
-                    </tr>
-                </table>`;
             
-            $('#results').html(mockResults);
-        }, 2000);
+            let tableHTML = '<table style="width:100%; text-align:left; border-collapse: collapse; margin-top: 15px;">';
+            tableHTML += '<tr style="border-bottom: 2px solid #444;"><th style="padding: 10px;">Porta</th><th style="padding: 10px;">Status</th><th style="padding: 10px;">Serviço</th></tr>';
+            
+            response.results.forEach(function(item) {
+                const color = item.status === 'Aberta' ? '#4caf50' : '#f44336';
+                let service = 'Desconhecido';
+                
+                if (item.port === 80) service = 'HTTP';
+                if (item.port === 443) service = 'HTTPS';
+                if (item.port === 22) service = 'SSH';
+                
+                tableHTML += '<tr style="border-bottom: 1px solid #333;">';
+                tableHTML += '<td style="padding: 8px;">' + item.port + '</td>';
+                tableHTML += '<td style="padding: 8px; color: ' + color + ';">' + item.status + '</td>';
+                tableHTML += '<td style="padding: 8px;">' + service + '</td>';
+                tableHTML += '</tr>';
+            });
+            
+            tableHTML += '</table>';
+            $('#results').html(tableHTML);
+        },
+        error: function() {
+            $('#progress-container').hide();
+            $('#scan-btn').prop('disabled', false).text('Escanear');
+            $('#results').html('<p style="color: #f44336;">Erro ao conectar com o servidor. Tente novamente.</p>');
+        }
+    });
     });
 });
