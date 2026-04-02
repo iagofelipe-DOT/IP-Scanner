@@ -39,7 +39,6 @@ function scanPort(port, host) {
         socket.connect(port, host);
     });
 }
-
 fastify.post('/api/server', async (request, reply) => {
     const { target } = request.body;
     const ports = [80, 443, 22];
@@ -49,7 +48,7 @@ fastify.post('/api/server', async (request, reply) => {
     return { target, results };
 });
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
     await fastify.ready();
     fastify.server.emit('request', req, res);
-}
+};
