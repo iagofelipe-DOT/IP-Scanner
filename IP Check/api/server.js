@@ -4,7 +4,7 @@ const rateLimit = require('@fastify/rate-limit');
 const net = require('net');
 
 fastify.register(cors, {
-    origin: '/api/server.js' 
+    origin: '/api/server' 
 });
 
 fastify.register(rateLimit, {
