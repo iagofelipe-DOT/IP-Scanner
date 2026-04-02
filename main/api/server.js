@@ -17,7 +17,7 @@ function scanPort(port, host) {
         const socket = new net.Socket();
         let status = 'Fechada';
         
-        socket.setTimeout(2000);
+        socket.setTimeout(1000);
         
         socket.on('connect', () => {
             status = 'Aberta';
