@@ -4,7 +4,7 @@ const rateLimit = require('@fastify/rate-limit');
 const net = require('net');
 
 fastify.register(cors, {
-    origin: 'https://project-tzws4.vercel.app/api/server.js' 
+    origin: '/api/server.js' 
 });
 
 fastify.register(rateLimit, {
