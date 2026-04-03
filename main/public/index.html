@@ -10,16 +10,32 @@
     <body>
         <div class="container">
             <h1>IP Scanner</h1>
+
             <div class="input-group">
                 <input type="text" id="target" placeholder="Digite o IP ou Domínio">
                 <button id="scan-btn">Escanear</button>
             </div>
+
             <div id="progress-container" style="display: none; width: 100%; background-color: #eee; border-radius: 4px; margin-top: 15px;">
-                 <div id="progress-bar" style="width: 0%; height: 10px; background-color: #4caf50; border-radius: 4px;"></div>
+                <div id="progress-bar" style="width: 0%; height: 10px; background-color: #4caf50; border-radius: 4px;"></div>
             </div>
-            <div id="results" class="results-area">
+
+            <div id="results" class="results-area"></div>
+
+            <div class="history-container">
+                <h3>Histórico Recente</h3>
+                <ul id="history-list"></ul>
+            </div>
+
         </div>
-    </div>
+
+        <div class="popular-services-section">
+            <h3>Status Globais</h3>
+            <p>Google (8.8.8.8): <span id="status-google">Carregando...</span></p>
+            <p>Cloudflare (1.1.1.1): <span id="status-cloudflare">Carregando...</span></p>
+            <p>Meta (facebook.com): <span id="status-meta">Carregando...</span></p>
+        </div>
+        
     </body>
     <script src="./script.js"></script>
 </html>
