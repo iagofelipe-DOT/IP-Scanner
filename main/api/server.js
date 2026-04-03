@@ -8,7 +8,7 @@ fastify.register(cors, {
 });
 
 fastify.register(rateLimit, {
-    max: 3, 
+    max: 15, 
     timeWindow: '1 minute'
 });
 

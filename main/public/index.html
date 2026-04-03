@@ -8,7 +8,13 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
     <body>
-        <div class="container">
+
+        <div class="side-panel container">
+            <h3>Histórico Recente</h3>
+            <span class="results-area"><ul id="history-list"></ul></span>
+        </div>
+
+        <div class="scanner-panel container">
             <h1>IP Scanner</h1>
 
             <div class="input-group">
@@ -21,21 +27,15 @@
             </div>
 
             <div id="results" class="results-area"></div>
-
-            <div class="history-container">
-                <h3>Histórico Recente</h3>
-                <ul id="history-list"></ul>
-            </div>
-
         </div>
 
-        <div class="popular-services-section">
+        <div class=" side-panel container">
             <h3>Status Globais</h3>
             <p>Google (8.8.8.8): <span id="status-google">Carregando...</span></p>
             <p>Cloudflare (1.1.1.1): <span id="status-cloudflare">Carregando...</span></p>
             <p>Meta (facebook.com): <span id="status-meta">Carregando...</span></p>
         </div>
-        
+
     </body>
     <script src="./script.js"></script>
 </html>
